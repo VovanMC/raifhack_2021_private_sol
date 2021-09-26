@@ -61,6 +61,8 @@ for x in data[data.price_type == 1]['floor'].unique():
     else:
         clean_floor_dict[x] = -10
 
+data['floor'] = data['floor'].map(clean_floor_dict)
+        
 center_pos = {}
 for city, lat, lng, dist in tqdm(data[['city', 'lat', 'lng', 'osm_city_closest_dist']].values):
   if center_pos.get(city) is None:
