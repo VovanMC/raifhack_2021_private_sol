@@ -62,7 +62,7 @@ for x in data[data.price_type == 1]['floor'].unique():
         clean_floor_dict[x] = -10
 
 data['floor'] = data['floor'].map(clean_floor_dict)
-        
+
 center_pos = {}
 for city, lat, lng, dist in tqdm(data[['city', 'lat', 'lng', 'osm_city_closest_dist']].values):
   if center_pos.get(city) is None:
@@ -164,8 +164,7 @@ def feval_raif(y_pred, lgb_train):
 
 
 
-def lgb_train(data, target, ltr, split_list, train_cols, param, v_e = 0, n_e = 10000, cat_col = None):
-    global best_score
+def lgb_train(data, target, ltr, split_list, train_cols, param, v_e = 0, n_e = 10000, cat_col = None):    
     pred = pd.DataFrame()
     pred_val = np.zeros(ltr)
     fi = np.zeros(data.shape[1])
@@ -199,11 +198,6 @@ def lgb_train(data, target, ltr, split_list, train_cols, param, v_e = 0, n_e = 1
         print(i+1, np.mean(score))
         print()
         del tr, te        
-
-        global best_score
-        if np.mean(score) > best_score:          
-          #break
-          pass
 
 
     pred_train[str(j)] = pred_val
